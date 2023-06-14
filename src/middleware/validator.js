@@ -4,6 +4,6 @@ module.exports = (req, res, next) => {
     if (req.query.name) {
         next();
     } else {
-        res.json({ message: "Pass a name" });
+        res.status(500).json({ message: "Pass a name" });
     }
 };

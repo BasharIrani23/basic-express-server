@@ -1,12 +1,9 @@
 "use strict";
 
-module.exports = (error, req, res, next) => {
-    console.log(error);
+module.exports = (err, req, res, next) => {
+    console.error(err);
     res.status(500).json({
-        code: 500,
+        message: "Internal Server Error",
         route: req.originalUrl,
-        query: req.query,
-        body: req.body,
-        mesasge: `SERVER ERROR: ${error.message}`,
     });
 };

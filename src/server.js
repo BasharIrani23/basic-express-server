@@ -9,12 +9,12 @@ const serverError = require("./error-handlers/500");
 const logger = require("./middleware/logger");
 const validator = require("./middleware/validator");
 
+app.use(serverError);
 app.use(logger);
 app.get("/", handleHome);
 app.get("/person", validator, handleName);
-
 app.use("*", pageNotFound);
-app.use(serverError);
+//app.get("/bad", badRequest);
 
 function handleName(req, res) {
     res.status(200).json({
@@ -28,6 +28,14 @@ function handleHome(req, res) {
         time: req.stamper,
     });
 }
+// function badRequest(req, res, next) {
+//     req.body = {
+//         test: "test",
+//     };
+//     next({ message: "Not a name" });
+
+//     // }
+// }
 
 function start(port) {
     app.listen(port, () => console.log("running on port: ", port));
